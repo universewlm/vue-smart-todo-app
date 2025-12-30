@@ -4,14 +4,14 @@
 - **编程语言**：JavaScript (ES6+)，理由：现代JavaScript语法简洁，浏览器原生支持，配合Vue.js开发效率高。  
 - **框架/库**：Vue.js 3，理由：响应式系统强大，组件化开发清晰，组合式API灵活。  
 - **数据库/存储**：IndexedDB，理由：浏览器内置，支持结构化数据存储，容量大（通常250MB+），异步操作不阻塞UI。  
-- 替代方案对比：localStorage：简单键值存储，不适合复杂数据结构和大量数据。SQLite：需要服务端支持，不适合纯前端应用 
+- **替代方案对比**：localStorage：简单键值存储，不适合复杂数据结构和大量数据。SQLite：需要服务端支持，不适合纯前端应用 
 
 ## 2. 项目结构设计
 - 纯前端单页应用，采用组件化开发模式：
   - 视图层：Vue组件负责UI渲染和用户交互
   - 数据层：IndexedDB负责数据持久化存储
   - 工具层：封装IndexedDB操作，提供统一API
-- 目录结构示例：  
+ - 目录结构示例：  
   ```
 todo-app/
     public/
@@ -69,12 +69,12 @@ todo-app/
 
 ## 5. 运行与测试方式
 - 本地运行方式。  
-  # 安装依赖
-    npm install
-  # 开发模式运行
-    npm run dev
-  # 构建生产版本
-    npm run build
+   安装依赖
+   npm install
+   开发模式运行
+   npm run dev
+   构建生产版本
+   npm run build
 - 已测试过的环境。  
   - 浏览器：Chrome 120+、Firefox 120+
   - Node版本：v18.0.0+
