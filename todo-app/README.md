@@ -1,5 +1,100 @@
-# Vue 3 + Vite
+# TODO List 项目说明文档
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 1. 技术选型
+- **编程语言**：JavaScript (ES6+)，理由：现代JavaScript语法简洁，浏览器原生支持，配合Vue.js开发效率高。  
+- **框架/库**：Vue.js 3，理由：响应式系统强大，组件化开发清晰，组合式API灵活。  
+- **数据库/存储**：IndexedDB，理由：浏览器内置，支持结构化数据存储，容量大（通常250MB+），异步操作不阻塞UI。  
+- 替代方案对比：localStorage：简单键值存储，不适合复杂数据结构和大量数据。SQLite：需要服务端支持，不适合纯前端应用 
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## 2. 项目结构设计
+- 纯前端单页应用，采用组件化开发模式：
+  - 视图层：Vue组件负责UI渲染和用户交互
+  - 数据层：IndexedDB负责数据持久化存储
+  - 工具层：封装IndexedDB操作，提供统一API
+- 目录结构示例：  
+  ```
+todo-app/
+    public/
+    src/
+        components/
+            TodoInput.vue
+            TodoList.vue
+            TodoItem.vue
+        utils/
+            idb.js
+        App.vue
+        main.js
+        style.css
+    index.html
+    package.json
+  ```  
+- 模块职责说明：
+  - TodoInput：接收用户输入，验证并触发添加任务
+  - TodoList：管理任务列表状态，包含筛选和排序逻辑
+  - TodoItem：渲染单个任务，处理完成/删除操作
+  - idb.js：封装IndexedDB的CRUD操作，提供Promise接口
+  - App.vue：组合所有组件，管理全局状态
+
+## 3. 需求细节与决策
+- 任务描述处理
+  - 描述字段：可选，默认空字符串
+  - 空输入处理：标题为必填项，提交前验证
+  - 输入验证：使用HTML5 required属性和JavaScript双重验证
+- 任务状态显示
+  - 完成状态：视觉区分（颜色变化、复选框标记）
+  - 列表显示：默认显示所有任务，支持筛选（全部/进行中/已完成）
+  - 状态切换：点击复选框或任务文本切换完成状态
+- 排序逻辑
+  - 默认排序：按创建时间倒序（最新在最前）
+  - 扩展排序：支持按优先级、截止日期排序
+  - 排序控制：通过下拉菜单让用户选择排序方式
+- 扩展功能设计思路
+  - 数据持久化：使用IndexedDB自动保存所有操作
+  - 离线可用：纯前端应用天然支持离线
+  - 搜索功能：通过输入框实时过滤任务标题和描述
+  - 批量操作：支持全选、批量删除、批量标记完成
+
+## 4. AI 使用说明
+- Cursor：代码生成和重构
+- ChatGPT-4：解决复杂逻辑问题和文档编写
+- 使用 AI 的环节：  
+  - 项目结构规划：AI建议合理的Vue项目结构
+  - IndexedDB封装：AI提供IndexedDB操作的最佳实践代码
+  - 组件交互逻辑：AI帮助设计组件间的数据流和事件传递
+  - 错误处理：AI建议完善的错误处理机制 
+- AI 输出修改：
+  - IndexedDB封装：AI最初建议简单实现，我增加了事务处理和错误回调
+  - 组件设计：AI建议使用选项式API，我改为组合式API以获得更好的类型推断
+  - 样式方案：AI建议使用Tailwind，我选择原生CSS以保持最小依赖
+
+## 5. 运行与测试方式
+- 本地运行方式。  
+  # 安装依赖
+    npm install
+  # 开发模式运行
+    npm run dev
+  # 构建生产版本
+    npm run build
+- 已测试过的环境。  
+  - 浏览器：Chrome 120+、Firefox 120+
+  - Node版本：v18.0.0+
+  - 操作系统：Windows 10
+- 已知问题与不足。
+  - 移动端适配：部分样式在移动设备上需要优化
+  - 数据迁移：IndexedDB版本升级时的数据迁移策略未实现
+  - 性能优化：大量任务（1000+）时渲染性能待优化 
+
+## 6. 总结与反思
+- 如果有更多时间，你会如何改进？  
+  - 测试覆盖：添加单元测试（Jest）和E2E测试（Cypress）
+  - 状态管理：引入Pinia管理复杂状态
+  - PWA支持：添加Service Worker实现离线缓存和安装提示
+  - 数据同步：增加后端API支持多设备同步
+  - 主题系统：实现深色/浅色模式切换
+- 你觉得这个实现的最大亮点是什么？
+  - 架构清晰：组件职责单一，数据流清晰可追踪
+  - 存储方案：选择IndexedDB而非localStorage，为复杂需求留出扩展空间
+  - 开发体验：使用Vue 3组合式API，逻辑复用性高
+  - 性能考虑：列表渲染使用key优化，避免不必要的重新渲染
+  - 渐进增强：核心功能稳定后，易于添加新功能而不破坏现有结构
+  - 工具使用：合理利用AI工具提升效率，同时保持代码质量和架构决策的自主性

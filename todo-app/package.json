@@ -1,18 +1,40 @@
 {
   "name": "todo-app",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A modern TODO List application built with Vue 3 and IndexedDB",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "vue": "^3.5.24"
+    "vue": "^3.4.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.1",
-    "vite": "^7.2.4"
-  }
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0",
+    "@vue/test-utils": "^2.4.0",
+    "jsdom": "^23.0.0",
+    "prettier": "^3.0.0"
+  },
+  "keywords": [
+    "todo",
+    "vue",
+    "indexeddb",
+    "productivity"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/todo-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/todo-app/issues"
+  },
+  "homepage": "https://github.com/yourusername/todo-app#readme"
 }
